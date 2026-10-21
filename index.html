@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exponent Quest — MBF3C Test Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <button class="brand" id="homeBtn" aria-label="Go to missions">
+    <span class="brand-mark"><span>x<sup>n</sup></span></span>
+    <span class="brand-name">Exponent Quest</span>
+  </button>
+  <nav class="bar-actions">
+    <button class="pill" id="rulesBtn">Rules sheet</button>
+    <button class="pill" id="sizeBtn" aria-pressed="false">Bigger text</button>
+  </nav>
+</header>
+
+<main id="app" tabindex="-1"></main>
+
+<dialog id="rulesDlg" aria-labelledby="rulesTitle">
+  <div class="dlg-head">
+    <h2 id="rulesTitle">Rules sheet</h2>
+    <button class="pill" id="rulesClose">Close</button>
+  </div>
+  <div id="rulesList" class="rules"></div>
+</dialog>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
