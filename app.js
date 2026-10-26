@@ -87,9 +87,13 @@
           <li>Wrong answers are fine. You get a hint and can try again.</li>
           <li><span>Stuck? Press <b>Show me how</b> to see every step.</span></li>
           <li><span>The <b>Rules sheet</b> button at the top is always there.</span></li>
+          <li>Watch the video lesson first, then do the missions that go with it.</li>
           <li>Do the missions in order. One mission at a time is enough.</li>
         </ul>
       </div>
+      <p class="section-label">Video lessons: watch first</p>
+      <div class="videos">${VIDEOS.map((v, i) => `<details class="vid"><summary><span class="m-num">▶</span><span><span class="m-title">${v.t}</span><br><span class="m-sub">${v.len} · goes with ${v.go}</span></span></summary>
+        <video controls playsinline preload="none" poster="videos/poster${i + 1}.jpg" src="videos/video${i + 1}.mp4"></video></details>`).join("")}</div>
       <p class="section-label">Missions</p>
       <div class="missions">${ms}</div>
       <p class="section-label">When you feel ready</p>

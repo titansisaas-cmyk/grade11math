@@ -559,3 +559,12 @@ RULES.push(
 );
 
 // Practice test: pick the review-sheet questions (marked with "Review") + final steps of word problems.
+
+const VIDEOS = [
+  { t: "Video 1: Exponent Rules", len: "4.6 min", go: "Missions 0 to 2" },
+  { t: "Video 2: Exponent Graphs and Word Problems", len: "4.5 min", go: "Missions 3 to 4B" },
+  { t: "Video 3: Expanding Brackets", len: "2.8 min", go: "Mission 5" },
+  { t: "Video 4: Solving Equations", len: "2.9 min", go: "Mission 6" },
+  { t: "Video 5: Ratios, Rates and the Pythagorean Theorem", len: "2.4 min", go: "Missions 7 and 8" },
+  { t: "Video 6: Similar Triangles", len: "2.6 min", go: "Mission 9" },
+];
