@@ -379,4 +379,183 @@ const MISSIONS = [
   },
 ];
 
+
+// ---------- Figures for geometry questions ----------
+const FIG = {
+  // Right triangle: vertical leg on the left, bottom leg, hypotenuse
+  right: (left, bottom, hyp) => `<svg class="fig" viewBox="0 0 240 170" role="img" aria-label="right triangle">
+    <polygon points="70,20 70,140 210,140" fill="#fff" stroke="#23282F" stroke-width="2"/>
+    <rect x="70" y="126" width="14" height="14" fill="none" stroke="#23282F" stroke-width="1.5"/>
+    <text x="62" y="85" font-size="15" text-anchor="end" fill="#23282F">${left}</text>
+    <text x="140" y="160" font-size="15" text-anchor="middle" fill="#23282F">${bottom}</text>
+    <text x="148" y="72" font-size="15" fill="#23282F">${hyp}</text></svg>`,
+  // Big triangle ABC (A top-left, B top-right, C bottom) with DE parallel to AB
+  nested: (ab, de, eb, ce) => `<svg class="fig" viewBox="0 0 240 200" role="img" aria-label="triangle with a parallel line inside">
+    <polygon points="30,30 210,30 120,180" fill="#fff" stroke="#23282F" stroke-width="2"/>
+    <line x1="75" y1="105" x2="165" y2="105" stroke="#23282F" stroke-width="2"/>
+    <path d="M115 25 l8 5 l-8 5 M115 100 l8 5 l-8 5" fill="none" stroke="#2F6680" stroke-width="2"/>
+    <text x="18" y="28" font-size="15" font-weight="700">A</text><text x="214" y="28" font-size="15" font-weight="700">B</text>
+    <text x="114" y="198" font-size="15" font-weight="700">C</text><text x="58" y="110" font-size="15" font-weight="700">D</text>
+    <text x="170" y="110" font-size="15" font-weight="700">E</text>
+    <text x="120" y="20" font-size="14" text-anchor="middle" fill="#2F6680">${ab}</text>
+    <text x="120" y="98" font-size="14" text-anchor="middle" fill="#2F6680">${de}</text>
+    <text x="196" y="72" font-size="14" fill="#2F6680">${eb}</text>
+    <text x="150" y="148" font-size="14" fill="#2F6680">${ce}</text></svg>`,
+};
+
+const MISSIONS_2 = [
+  {
+    id: "m5", title: "Mission 5", badge: "5", sub: "Expanding brackets (Review Review 1)", minutes: "15 min",
+    items: [
+      { type: "lesson", title: "Expanding = multiply everything out",
+        body: R`<div class="big-math">\(5(x + 2) = 5x + 10\)</div>
+        <p>A number outside a bracket multiplies <b>every</b> term inside.</p>
+        <div class="big-math">\((x + 4)(x + 5) = x^2 + 5x + 4x + 20 = x^2 + 9x + 20\)</div>
+        <p>Two brackets: each term in the first times each term in the second (First, Outside, Inside, Last). Then collect like terms.</p>
+        <p class="tip">Squared bracket = the bracket twice: \((x-2)^2 = (x-2)(x-2)\). It is NOT \(x^2 - 4\).</p>` },
+      E(R`Expand \(3(x + 4)\)`, [R`\(3x + 12\)`, R`\(3x + 4\)`, R`\(x + 12\)`, R`\(7x\)`], "Multiply the 3 by the x AND by the 4.", [R`\(3 \times x = 3x\)`, R`\(3 \times 4 = 12\)`, R`\(3x + 12\)`]),
+      E(R`Expand \(2(x - 5)\)`, [R`\(2x - 10\)`, R`\(2x - 5\)`, R`\(2x + 10\)`, R`\(x - 10\)`], "Multiply the 2 by both terms. Keep the minus sign.", [R`\(2 \times x = 2x\)`, R`\(2 \times (-5) = -10\)`, R`\(2x - 10\)`]),
+      E(R`What is \(x \cdot x\)?`, [R`\(x^2\)`, R`\(2x\)`, R`\(x\)`, R`\(2\)`], "Same letter multiplied: add the exponents.", [R`\(x^1 \cdot x^1 = x^2\)`]),
+      E(R`What is \((-2)(+4)\)?`, [R`\(-8\)`, R`\(8\)`, R`\(2\)`, R`\(-6\)`], "Negative times positive is negative.", [R`\(2 \times 4 = 8\)`, "One negative: the answer is negative, −8."]),
+      { q: R`Expand and simplify \(5(x + 2)\) <span class="src">Review Review 1a</span>`, choices: [R`\(5x + 10\)`, R`\(5x + 2\)`, R`\(x + 10\)`, R`\(5x + 7\)`],
+        hints: ["Multiply the 5 by each term inside."], steps: [R`\(5 \times x = 5x\)`, R`\(5 \times 2 = 10\)`, R`\(5x + 10\)`], why: R`\(5x + 10\)` },
+      E(R`Expand \((x + 2)(x + 3)\)`, [R`\(x^2 + 5x + 6\)`, R`\(x^2 + 6\)`, R`\(x^2 + 6x + 5\)`, R`\(2x + 5\)`], "Four multiplications: x·x, x·3, 2·x, 2·3.", [R`\(x \cdot x = x^2\)`, R`\(x \cdot 3 = 3x\)`, R`\(2 \cdot x = 2x\)`, R`\(2 \cdot 3 = 6\)`, R`\(x^2 + 3x + 2x + 6 = x^2 + 5x + 6\)`]),
+      { q: R`Expand and simplify \((x + 4)(x + 5)\) <span class="src">Review Review 1b</span>`, choices: [R`\(x^2 + 9x + 20\)`, R`\(x^2 + 20\)`, R`\(x^2 + 20x + 9\)`, R`\(2x + 9\)`],
+        hints: ["First, Outside, Inside, Last: x·x, x·5, 4·x, 4·5.", "Add the two middle x terms together."], steps: [R`\(x \cdot x = x^2\)`, R`\(x \cdot 5 = 5x\)`, R`\(4 \cdot x = 4x\)`, R`\(4 \cdot 5 = 20\)`, R`\(x^2 + 5x + 4x + 20 = x^2 + 9x + 20\)`], why: R`\(x^2 + 9x + 20\)` },
+      E(R`What does \((x - 2)^2\) mean?`, [R`\((x - 2)(x - 2)\)`, R`\(x^2 - 4\)`, R`\(2x - 4\)`, R`\(x^2 + 4\)`], "Squared means times itself.", [R`\((x-2)^2 = (x-2)(x-2)\)`], R`\((x - 2)(x - 2)\). This is the trap: it is NOT \(x^2 - 4\).`),
+      { q: R`Expand and simplify \(2(x - 2)^2\) <span class="src">Review Review 1c</span>`, choices: [R`\(2x^2 - 8x + 8\)`, R`\(2x^2 - 8x - 8\)`, R`\(2x^2 - 8\)`, R`\(4x^2 - 8x + 8\)`],
+        hints: [R`Do the square first: \((x - 2)(x - 2)\).`, R`\((x-2)(x-2) = x^2 - 4x + 4\). Now multiply every term by 2.`],
+        steps: [R`\((x-2)(x-2) = x^2 - 2x - 2x + 4 = x^2 - 4x + 4\)`, R`\(2(x^2 - 4x + 4) = 2x^2 - 8x + 8\)`],
+        why: R`\(2x^2 - 8x + 8\)<br><span class="note">Heads up: the answer sheet says \(-8\) at the end. \((-2)(-2) = +4\), and \(2 \times 4 = +8\), so \(+8\) is right. Good thing to ask your teacher about.</span>` },
+      E(R`Expand \((x + 4)(x - 2)\)`, [R`\(x^2 + 2x - 8\)`, R`\(x^2 - 2x - 8\)`, R`\(x^2 + 2x + 8\)`, R`\(x^2 - 8\)`], "x·x, x·(−2), 4·x, 4·(−2).", [R`\(x^2 - 2x + 4x - 8\)`, R`\(-2x + 4x = 2x\)`, R`\(x^2 + 2x - 8\)`]),
+      { q: R`Expand and simplify \(3(x + 4)(x - 2)\) <span class="src">Review Review 1d</span>`, choices: [R`\(3x^2 + 6x - 24\)`, R`\(7x + 20\)`, R`\(3x^2 + 2x - 8\)`, R`\(3x^2 + 6x + 24\)`],
+        hints: ["Do NOT give the 3 to both brackets. Multiply the two brackets together first.", R`\((x+4)(x-2) = x^2 + 2x - 8\). Now multiply every term by 3.`],
+        steps: [R`\((x+4)(x-2) = x^2 - 2x + 4x - 8 = x^2 + 2x - 8\)`, R`\(3(x^2 + 2x - 8) = 3x^2 + 6x - 24\)`], why: R`\(3x^2 + 6x - 24\)` },
+    ],
+  },
+  {
+    id: "m6", title: "Mission 6", badge: "6", sub: "Solving equations (Review Review 2)", minutes: "15 min",
+    items: [
+      { type: "lesson", title: "Get x alone",
+        body: R`<p>An equation is a balance. Whatever you do to one side, do to the other side.</p>
+        <ol><li>Expand any brackets.</li><li>Get the x terms on one side.</li><li>Get the numbers on the other side.</li><li>Divide to get x by itself.</li></ol>
+        <div class="big-math">\(4x + 3 = 27 \;\to\; 4x = 24 \;\to\; x = 6\)</div>
+        <p class="tip">Undo + with −. Undo × with ÷. Check by putting your answer back in.</p>` },
+      E(R`Solve \(x + 8 = 15\)`, [R`\(x = 7\)`, R`\(x = 23\)`, R`\(x = -7\)`, R`\(x = 120\)`], "Subtract 8 from both sides.", [R`\(x = 15 - 8 = 7\)`]),
+      E(R`Solve \(4x = -64\)`, [R`\(x = -16\)`, R`\(x = 16\)`, R`\(x = -60\)`, R`\(x = -256\)`], "Divide both sides by 4.", [R`\(x = -64 \div 4 = -16\)`]),
+      E(R`Solve \(x - 4 = -28\)`, [R`\(x = -24\)`, R`\(x = -32\)`, R`\(x = 24\)`, R`\(x = 7\)`], "Add 4 to both sides.", [R`\(x = -28 + 4 = -24\)`]),
+      E(R`Solve \(4x - 3 = -19\)`, [R`\(x = -4\)`, R`\(x = 4\)`, R`\(x = -5.5\)`, R`\(x = -16\)`], "Add 3 first, then divide by 4.", [R`\(4x = -19 + 3 = -16\)`, R`\(x = -16 \div 4 = -4\)`]),
+      { q: R`Solve \(x = 2(-3)^2\) <span class="src">Review Review 2a</span>`, choices: [R`\(x = 18\)`, R`\(x = -18\)`, R`\(x = 36\)`, R`\(x = -12\)`],
+        hints: [R`Do the power first: \((-3)^2\). The minus is inside the brackets.`], steps: [R`\((-3)^2 = (-3)(-3) = 9\)`, R`\(2 \times 9 = 18\)`], why: R`\(x = 18\)` },
+      { q: R`Solve \(4x + 3 = 27\) <span class="src">Review Review 2b</span>`, choices: [R`\(x = 6\)`, R`\(x = 7.5\)`, R`\(x = 30\)`, R`\(x = 24\)`],
+        hints: ["Subtract 3 from both sides first."], steps: [R`\(4x = 27 - 3 = 24\)`, R`\(x = 24 \div 4 = 6\)`], why: R`\(x = 6\)` },
+      E(R`Solve \(3(x - 4) = 12\)`, [R`\(x = 8\)`, R`\(x = 4\)`, R`\(x = 5.33\)`, R`\(x = 16\)`], "Expand first: 3x − 12 = 12.", [R`\(3x - 12 = 12\)`, R`\(3x = 24\)`, R`\(x = 8\)`]),
+      E(R`Solve \(-3x + 6 = 2x - 9\)`, [R`\(x = 3\)`, R`\(x = -3\)`, R`\(x = 0.6\)`, R`\(x = 15\)`], "Subtract 2x from both sides, then subtract 6.", [R`\(-3x - 2x + 6 = -9\)`, R`\(-5x = -15\)`, R`\(x = 3\)`]),
+      { q: R`Solve \(2(x + 1) = -5(x + 8)\) <span class="src">Review Review 2c</span>`, choices: [R`\(x = -6\)`, R`\(x = 6\)`, R`\(x = -42\)`, R`\(x = -38\)`],
+        hints: ["Expand BOTH sides first. The −5 multiplies the x and the 8.", R`\(2x + 2 = -5x - 40\). Add 5x to both sides.`],
+        steps: [R`\(2x + 2 = -5x - 40\)`, R`Add \(5x\): \(7x + 2 = -40\)`, R`Subtract 2: \(7x = -42\)`, R`Divide by 7: \(x = -6\)`], why: R`\(x = -6\)` },
+      { q: R`Solve \(\dfrac{x}{5} + 2 = \dfrac{x}{4}\) <span class="src">Review Review 2d</span>`, choices: [R`\(x = 40\)`, R`\(x = -40\)`, R`\(x = 20\)`, R`\(x = 10\)`],
+        hints: ["Get rid of the fractions: multiply EVERY term by 20 (because 5 × 4 = 20).", R`\(4x + 40 = 5x\)`],
+        steps: [R`\(20 \cdot \tfrac{x}{5} = 4x\), \(20 \cdot 2 = 40\), \(20 \cdot \tfrac{x}{4} = 5x\)`, R`\(4x + 40 = 5x\)`, R`Subtract \(4x\): \(40 = x\)`], why: R`\(x = 40\)` },
+    ],
+  },
+  {
+    id: "m7", title: "Mission 7", badge: "7", sub: "Ratios, rates and proportions (Review Review 3–4)", minutes: "15 min",
+    items: [
+      { type: "lesson", title: "Ratios, rates and proportions",
+        body: R`<p><b>Ratio:</b> compares things with the same units, written a : b. Always reduce it, like a fraction. 33 : 44 = 3 : 4.</p>
+        <p><b>Rate:</b> compares different units. Reduce to "per 1". 320 km in 3.5 h → \(320 \div 3.5 \approx 91\) km/h.</p>
+        <p><b>Proportion:</b> two equal ratios. Cross-multiply to solve.</p>
+        <div class="big-math">\(\dfrac{3}{8} = \dfrac{x}{13} \;\to\; 8x = 39 \;\to\; x = 4.875\)</div>
+        <p class="tip">Nearest tenth = 1 decimal place. Nearest hundredth = 2 decimal places.</p>` },
+      E("Simplify the ratio 33 : 44", ["3 : 4", "11 : 4", "1 : 2", "4 : 3"], "Both numbers divide by 11.", ["33 ÷ 11 = 3", "44 ÷ 11 = 4", "3 : 4"]),
+      E("6 false answers to 9 correct answers, as a ratio in lowest terms?", ["2 : 3", "3 : 2", "6 : 15", "1 : 3"], "Write 6 : 9, then divide both by 3.", ["6 : 9", "Divide both by 3: 2 : 3"]),
+      E("Simplify the three-term ratio 42 : 28 : 7", ["6 : 4 : 1", "42 : 4 : 1", "3 : 2 : 1", "6 : 4 : 7"], "All three numbers divide by 7.", ["42 ÷ 7 = 6, 28 ÷ 7 = 4, 7 ÷ 7 = 1", "6 : 4 : 1"]),
+      E("15 cans cost $3. What is the unit rate?", ["$0.20 per can", "$5 per can", "$0.50 per can", "$45"], "Price ÷ number of cans.", [R`\(3 \div 15 = 0.20\)`, "$0.20 per can"]),
+      { q: R`Write 320 km of driving in 3.5 hours as a rate, rounded to the nearest whole number. <span class="src">Review Review 3</span>`, choices: ["91 km/h", "1120 km/h", "92 km/h", "9 km/h"],
+        hints: ["km ÷ hours.", R`\(320 \div 3.5 = 91.43\). Nearest whole number?`], steps: [R`\(320 \div 3.5 = 91.43\)`, "Round to the nearest whole number: 91 km/h"], why: "91 km/h" },
+      E(R`Solve \(\dfrac{x}{4} = \dfrac{6}{8}\)`, [R`\(x = 3\)`, R`\(x = 12\)`, R`\(x = 2\)`, R`\(x = 1.33\)`], "Cross-multiply: 8x = 4 × 6.", [R`\(8x = 24\)`, R`\(x = 3\)`]),
+      { q: R`Find x in \(\dfrac{3}{8} = \dfrac{x}{13}\), rounded to the nearest tenth. <span class="src">Review Review 4</span>`, choices: [R`\(x = 4.9\)`, R`\(x = 34.7\)`, R`\(x = 4.8\)`, R`\(x = 5.0\)`],
+        hints: ["Cross-multiply: 8 × x = 3 × 13.", R`\(8x = 39\). Divide by 8, then round to 1 decimal place.`], steps: [R`\(8x = 3 \times 13 = 39\)`, R`\(x = 39 \div 8 = 4.875\)`, "Nearest tenth: 4.9"], why: R`\(x = 4.9\)` },
+      E("Last year 3 out of 4 students bought a yearbook. This year there are 640 students. How many yearbooks should be sold?", ["480", "213", "853", "160"], "Set up 3/4 = x/640.", [R`\(\tfrac{3}{4} = \tfrac{x}{640}\)`, R`\(4x = 1920\)`, R`\(x = 480\)`]),
+      E("A car used 24 L of gas to drive 252 km. What is the rate in km per litre?", ["10.5 km/L", "0.095 km/L", "276 km/L", "6048 km/L"], "km ÷ litres.", [R`\(252 \div 24 = 10.5\)`, "10.5 km/L"]),
+    ],
+  },
+  {
+    id: "m8", title: "Mission 8", badge: "8", sub: "Pythagorean theorem (Review Review 5)", minutes: "12 min",
+    items: [
+      { type: "lesson", title: "Right triangles: a² + b² = c²",
+        body: R`${FIG.right("a", "b", "c")}
+        <div class="big-math">\(a^2 + b^2 = c^2\)</div>
+        <p><b>c</b> is the hypotenuse: the longest side, across from the square corner. <b>a</b> and <b>b</b> are the two legs.</p>
+        <p>Finding the long side? <b>Add</b>: \(c = \sqrt{a^2 + b^2}\)</p>
+        <p>Finding a short side? <b>Subtract</b>: \(a = \sqrt{c^2 - b^2}\)</p>
+        <p class="tip">Calculator: square each side, add or subtract, then press √.</p>` },
+      E("Which side is the hypotenuse?", ["The longest side, across from the square corner", "The shortest side", "Any side touching the square corner", "The bottom side"], "Look across from the little square.", ["The hypotenuse is always across from the right angle.", "It is always the longest side."]),
+      E("The legs are 3 and 4. How long is the hypotenuse?", ["5", "7", "25", "12"], R`\(3^2 + 4^2 = 9 + 16\)`, [R`\(9 + 16 = 25\)`, R`\(\sqrt{25} = 5\)`]),
+      E("The legs are 6 and 8. How long is the hypotenuse?", ["10", "14", "100", "48"], R`\(36 + 64\), then √.`, [R`\(6^2 + 8^2 = 36 + 64 = 100\)`, R`\(\sqrt{100} = 10\)`]),
+      E("The hypotenuse is 13 and one leg is 5. How long is the other leg?", ["12", "13.93", "8", "144"], "Finding a leg: SUBTRACT.", [R`\(13^2 - 5^2 = 169 - 25 = 144\)`, R`\(\sqrt{144} = 12\)`]),
+      E("Round 7.599 to the nearest hundredth.", ["7.60", "7.59", "7.50", "8.00"], "Hundredth = 2 decimal places. Look at the third decimal.", ["7.599: the third decimal is 9, so round up.", "7.60"]),
+      { ctx: R`${FIG.right("2.5 m", "x", "8 m")}`, q: R`Find the unknown side x, rounded to the nearest hundredth. <span class="src">Review Review 5</span>`, choices: ["7.60 m", "8.38 m", "5.50 m", "57.75 m"],
+        hints: ["8 m is across from the square corner, so it is the hypotenuse. You are finding a leg: SUBTRACT.", R`\(x = \sqrt{8^2 - 2.5^2} = \sqrt{64 - 6.25}\)`],
+        steps: [R`\(8^2 = 64\) and \(2.5^2 = 6.25\)`, R`\(64 - 6.25 = 57.75\)`, R`\(\sqrt{57.75} = 7.599...\)`, "Nearest hundredth: 7.60 m"], why: "x = 7.60 m" },
+      E("Is a triangle with sides 5, 12 and 13 a right triangle?", ["Yes, because 25 + 144 = 169", "No, because 5 + 12 is not 13", "Yes, because 5 + 12 is more than 13", "No, the sides are too long"], R`Check if \(5^2 + 12^2 = 13^2\).`, [R`\(25 + 144 = 169\)`, R`\(13^2 = 169\)`, "They match, so yes."]),
+      E("A 10 m ladder leans on a wall. Its foot is 6 m from the wall. How high up the wall does it reach?", ["8 m", "11.66 m", "4 m", "64 m"], "The ladder is the hypotenuse. Subtract.", [R`\(10^2 - 6^2 = 100 - 36 = 64\)`, R`\(\sqrt{64} = 8\)`]),
+    ],
+  },
+  {
+    id: "m9", title: "Mission 9", badge: "9", sub: "Similar triangles (Review Review 6)", minutes: "15 min",
+    items: [
+      { type: "lesson", title: "Similar vs. congruent",
+        body: R`<p><b>Similar:</b> same shape, different size. All angles are equal, and the sides are in the same ratio. One is a zoom of the other.</p>
+        <p><b>Congruent:</b> same shape AND same size.</p>
+        <p><b>Proving similar (AA):</b> show 2 pairs of equal angles. The third pair must match too, because angles in a triangle add to 180°.</p>
+        <p class="tip">Naming matters: △ABC ~ △DEF means A matches D, B matches E, C matches F.</p>` },
+      { type: "lesson", title: "Angles with parallel lines",
+        body: R`<p><b>F pattern:</b> corresponding angles are equal.</p>
+        <p><b>Z pattern:</b> alternate angles are equal.</p>
+        <p><b>X pattern:</b> opposite angles are equal.</p>
+        ${FIG.nested("", "", "", "")}
+        <p>If DE is parallel to AB: angle C is shared by both triangles, and angle CDE = angle CAB (F pattern). So △CDE ~ △CAB by AA.</p>
+        <p class="tip">To find x: small side / big side = small side / big side. Use the WHOLE side of the big triangle.</p>` },
+      E("Similar triangles have…", ["Equal angles, and sides in the same ratio", "Equal sides only", "The same size and shape", "Different angles"], "Similar = zoomed copy.", ["Similar triangles have the same angles.", "Their sides are in the same ratio."]),
+      E("Congruent triangles have…", ["The same shape and the same size", "The same shape, different size", "The same area only", "The same perimeter only"], "Congruent = exact copy.", ["Congruent means identical: same shape and same size."]),
+      E("How many pairs of equal angles do you need to show to prove two triangles are similar?", ["2", "1", "3", "0"], "AA = Angle, Angle.", ["AA means 2 angles.", "The third pair always matches because the angles add to 180°."]),
+      E("Two angles of a triangle are 35° and 60°. What is the third angle?", ["85°", "95°", "265°", "25°"], "Angles in a triangle add to 180°.", [R`\(180 - 35 - 60 = 85\)`]),
+      E("In the F pattern with parallel lines, the angles are…", ["Corresponding angles, and they are equal", "Alternate angles, and they add to 180°", "Opposite angles", "Never equal"], "F = corresponding.", ["F pattern: corresponding angles, equal."]),
+      E("In the Z pattern with parallel lines, the angles are…", ["Alternate angles, and they are equal", "Corresponding angles, and they add to 90°", "Opposite angles", "Never equal"], "Z = alternate.", ["Z pattern: alternate angles, equal."]),
+      { ctx: R`△ABC has angle B = 35°, angle C = 60°, AC = 15 cm, BC = 30 cm. △DEF has angle E = 35°, angle F = 60°, EF = 15 cm, DF = x. <span class="src">Similar Triangles sheet</span>`, stepLabel: "Step 1 of 2",
+        q: "Why are the triangles similar?", choices: ["Angle B = angle E and angle C = angle F (AA)", "All three sides are equal", "They are the same size", "Both have a side of 15 cm"],
+        hints: ["Look at the angles. How many pairs match?"], steps: ["Angle B = angle E = 35°", "Angle C = angle F = 60°", "2 pairs of equal angles: similar by AA"], why: "Two pairs of equal angles: AA." },
+      { ctx: R`△ABC ~ △DEF. BC = 30 cm matches EF = 15 cm. AC = 15 cm matches DF = x.`, stepLabel: "Step 2 of 2",
+        q: "Find x.", choices: ["7.5 cm", "30 cm", "13 cm", "52 cm"],
+        hints: ["EF / BC = 15 / 30 = 1/2. The small triangle is half size.", R`\(\tfrac{x}{15} = \tfrac{15}{30}\)`], steps: [R`\(\tfrac{x}{15} = \tfrac{15}{30}\)`, R`\(30x = 225\)`, R`\(x = 7.5\)`], why: "x = 7.5 cm" },
+      { ctx: R`${FIG.nested("9", "x", "2", "4")}DE is parallel to AB. AB = 9, DE = x, CE = 4, EB = 2. <span class="src">Review Review 6</span>`, stepLabel: "Step 1 of 3",
+        q: "Why is △CDE similar to △CAB?", choices: ["Angle C is shared, and angle CDE = angle CAB (F pattern), so AA", "All three sides are equal", "They are the same size", "DE is half of AB"],
+        hints: ["Which angle is in both triangles? What do parallel lines give you?"], steps: ["Angle C is in both triangles.", "DE ∥ AB, so angle CDE = angle CAB (corresponding, F pattern).", "2 pairs of equal angles: similar by AA."], why: "AA: shared angle C, plus corresponding angles from the parallel lines." },
+      { ctx: R`${FIG.nested("9", "x", "2", "4")}CE = 4 and EB = 2.`, stepLabel: "Step 2 of 3",
+        q: "How long is the whole side CB?", choices: ["6", "2", "4", "8"],
+        hints: ["CB is CE plus EB."], steps: [R`\(CB = 4 + 2 = 6\)`], why: "CB = 6. Always use the WHOLE side of the big triangle." },
+      { ctx: R`${FIG.nested("9", "x", "2", "4")}Small △CDE: DE = x, CE = 4. Big △CAB: AB = 9, CB = 6.`, stepLabel: "Step 3 of 3",
+        q: "Find x.", choices: ["6 m", "13.5 m", "4.5 m", "18 m"],
+        hints: ["small / big = small / big", R`\(\tfrac{x}{9} = \tfrac{4}{6}\)`], steps: [R`\(\tfrac{x}{9} = \tfrac{4}{6}\)`, R`Cross-multiply: \(6x = 36\)`, R`\(x = 6\)`], why: "x = 6 m" },
+      { ctx: R`${FIG.nested("x", "6", "4", "8")}DE is parallel to AB. AB = x, DE = 6, CE = 8, EB = 4. <span class="src">Similar Triangles sheet</span>`,
+        q: "Find x.", choices: ["9", "12", "3", "4"],
+        hints: ["Whole side CB = 8 + 4 = 12.", R`\(\tfrac{x}{6} = \tfrac{12}{8}\)`], steps: [R`\(CB = 8 + 4 = 12\)`, R`\(\tfrac{x}{6} = \tfrac{12}{8}\)`, R`\(8x = 72\)`, R`\(x = 9\)`], why: "x = 9" },
+    ],
+  },
+];
+MISSIONS.push(...MISSIONS_2);
+
+RULES.push(
+  { name: "Expanding", rule: R`\(5(x + 2) = 5x + 10\)`, plain: "Multiply the outside number by every term inside." },
+  { name: "Two brackets (FOIL)", rule: R`\((x + 4)(x + 5) = x^2 + 9x + 20\)`, plain: "Each term in the first bracket times each term in the second, then collect like terms. \\((x-2)^2 = (x-2)(x-2)\\), not \\(x^2 - 4\\)." },
+  { name: "Solving equations", rule: R`\(4x + 3 = 27 \to 4x = 24 \to x = 6\)`, plain: "Do the same thing to both sides. Expand first, x terms on one side, numbers on the other, then divide." },
+  { name: "Fractions in an equation", rule: R`\(\tfrac{x}{5} + 2 = \tfrac{x}{4} \to 4x + 40 = 5x\)`, plain: "Multiply every term by the common denominator (here 20) to clear the fractions." },
+  { name: "Ratio and rate", rule: R`\(33 : 44 = 3 : 4\)`, plain: "Reduce ratios like fractions. A rate is per 1: 320 km ÷ 3.5 h ≈ 91 km/h." },
+  { name: "Proportion", rule: R`\(\tfrac{3}{8} = \tfrac{x}{13} \to 8x = 39\)`, plain: "Cross-multiply, then divide." },
+  { name: "Pythagorean theorem", rule: R`\(a^2 + b^2 = c^2\)`, plain: "c is the longest side, across from the square corner. Finding c: add. Finding a leg: subtract. Then √." },
+  { name: "Similar triangles", rule: R`\(\tfrac{\text{small}}{\text{big}} = \tfrac{\text{small}}{\text{big}}\)`, plain: "Prove similar with 2 equal angles (AA). Parallel lines: F = corresponding (equal), Z = alternate (equal), X = opposite (equal). Use the whole side of the big triangle." },
+);
+
 // Practice test: pick the review-sheet questions (marked with "Review") + final steps of word problems.

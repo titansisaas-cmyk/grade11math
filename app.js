@@ -80,8 +80,8 @@
     }).join("");
     app.innerHTML = `<section class="fade">
       <div class="welcome">
-        <h1>Exponents test review</h1>
-        <p class="muted">MBF3C · Grade 11 · Made from your review sheet</p>
+        <h1>MBF3C test review</h1>
+        <p class="muted">MBF3C · Grade 11 · Exponents, algebra, rates and geometry · Made from your review sheets</p>
         <ul class="calm-list">
           <li>There is no timer. Take as long as you need.</li>
           <li>Wrong answers are fine. You get a hint and can try again.</li>
@@ -96,7 +96,7 @@
       <div class="missions">
         <button class="mission ${prog.test ? "done" : ""}" data-m="test">
           <span class="m-num">T</span>
-          <span><span class="m-title">Practice test</span><br><span class="m-sub">12 mixed questions from all missions · no hints shown first</span></span>
+          <span><span class="m-title">Practice test</span><br><span class="m-sub">15 mixed questions from all missions · no hints shown first</span></span>
           <span class="m-meta">${prog.test ? `<b>Best</b>${prog.test.first}/${prog.test.total}` : "Start"}</span>
         </button>
       </div>
@@ -121,7 +121,7 @@
   function startTest() {
     const pool = [];
     MISSIONS.forEach((m) => m.items.forEach((it) => { if (it.type !== "lesson" && (/Review|Word problem/.test(it.q + (it.ctx || "")))) pool.push(it); }));
-    start("test", shuffle(pool).slice(0, 12), "Practice test", true);
+    start("test", shuffle(pool).slice(0, 15), "Practice test", true);
   }
 
   function render() {
