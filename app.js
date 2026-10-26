@@ -167,7 +167,8 @@
     function addPanel(cls, title, html) {
       const d = document.createElement("div");
       d.className = "panel fade " + cls;
-      d.innerHTML = `<h3>${title}</h3>${html}`;
+      const meth = (it.methods && cls !== "notyet" && !out.querySelector(".method")) ? `<p class="method">On your cheat sheet: ${it.methods.map((m) => `<b>${m[0]}</b> → ${m[1]}`).join("<br>")}</p>` : "";
+      d.innerHTML = `<h3>${title}</h3>${meth}${html}`;
       out.appendChild(d); math(d); return d;
     }
     function showHint(pre) {

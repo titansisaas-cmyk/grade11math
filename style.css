@@ -123,3 +123,5 @@ dialog::backdrop{background:rgba(35,40,47,.45)}
 
 .fig{display:block;width:100%;max-width:260px;height:auto;margin:6px auto 10px}
 .fig text{font-family:inherit;fill:#23282F}
+.method{font-size:.86em;background:#fff;border-left:4px solid #2F6680;border-radius:6px;padding:6px 10px;margin:4px 0 10px;color:#23282F}
+.method b{color:#2F6680}
