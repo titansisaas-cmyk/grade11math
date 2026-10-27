@@ -171,7 +171,7 @@
     function addPanel(cls, title, html) {
       const d = document.createElement("div");
       d.className = "panel fade " + cls;
-      const meth = (it.methods && cls !== "notyet" && !out.querySelector(".method")) ? `<p class="method">On your cheat sheet: ${it.methods.map((m) => `<b>${m[0]}</b> → ${m[1]}`).join("<br>")}</p>` : "";
+      const meth = (it.methods && cls !== "notyet" && !out.querySelector(".method")) ? `<p class="method">${it.methods[0][0].startsWith("Rules sheet") || it.methods[0][0].startsWith("Basics") ? "Look it up: " : "On your cheat sheet: "}${it.methods.map((m) => `<b>${m[0]}</b> → ${m[1]}`).join("<br>")}</p>` : "";
       d.innerHTML = `<h3>${title}</h3>${meth}${html}`;
       out.appendChild(d); math(d); return d;
     }

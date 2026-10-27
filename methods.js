@@ -82,3 +82,18 @@ MISSIONS.forEach((m) => m.items.forEach((it, i) => {
   const codes = (METHOD_MAP[m.id] || {})[i];
   if (codes) it.methods = codes.map((c) => SHEET[c]);
 }));
+// Basics and formula-writing missions
+Object.assign(SHEET, {
+  B_NEG: ["Rules sheet in the app", "Negative numbers"], B_BED: ["Rules sheet in the app", "BEDMAS"], B_FR: ["Basics 2 lesson", "Fractions in 3 rules"], B_PCT: ["Rules sheet in the app", "Percent ↔ decimal: move 2 places"],
+  B_OF: ["Rules sheet in the app", "Percent of something: change to a decimal and multiply"], WRITE: ["Word Problems", "Write all 5 lines: key word, formula, numbers, plug in, answer"],
+});
+const METHOD_MAP_0 = {
+  b1: [1,2,3,4,5,6,7,8,9,10].reduce((o,i)=>(o[i]=["B_NEG"],o),{}),
+  b2: { 1:["B_BED"],2:["B_BED"],3:["B_BED"],4:["B_BED"],5:["B_BED"],7:["B_FR"],8:["B_FR"],9:["B_FR"],10:["B_FR"] },
+  b3: { 1:["B_PCT"],2:["B_PCT"],3:["B_PCT"],4:["B_PCT"],5:["B_PCT"],6:["B_PCT"],8:["B_OF"],9:["B_OF"],10:["INC"],11:["DEC"] },
+  f1: { 1:["WRITE","DBL"],2:["WRITE","UNITS"],3:["WRITE","DBL"],4:["PERIODS"],5:["CALC"],6:["WRITE","INC"],7:["WRITE","INC"],8:["WRITE","INC"],9:["CALC"],10:["WRITE","HALF"],11:["WRITE","DATES"],12:["WRITE","HALF"],13:["FRACEXP"],14:["LEG"] },
+};
+MISSIONS.forEach((m) => m.items.forEach((it, i) => {
+  const codes = (METHOD_MAP_0[m.id] || {})[i];
+  if (codes) it.methods = codes.map((c) => SHEET[c]);
+}));

@@ -560,6 +560,127 @@ RULES.push(
 
 // Practice test: pick the review-sheet questions (marked with "Review") + final steps of word problems.
 
+// ---------- Basics and formula writing (added for foundation skills) ----------
+const MISSIONS_0 = [
+  {
+    id: "b1", title: "Basics 1", badge: "B1", sub: "Negative numbers", minutes: "10 min",
+    items: [
+      { type: "lesson", title: "Negative numbers: the four rules",
+        body: R`<p><b>Adding a negative</b> is the same as subtracting: \(5 + (-3) = 5 - 3 = 2\).</p>
+        <p><b>Subtracting a negative</b>: two minuses side by side become a plus: \(5 - (-3) = 5 + 3 = 8\).</p>
+        <p><b>Multiplying or dividing:</b> same signs give a positive. Different signs give a negative.</p>
+        <div class="big-math">\((-3)(-4) = 12 \qquad (-3)(4) = -12\)</div>
+        <p class="tip">Think of money: −3 means you owe $3. If you owe $3 and get $5, you have $2.</p>` },
+      E(R`\(-3 + 5\)`, ["2", "−8", "8", "−2"], "You owe $3 and get $5. How much do you have?", ["Start at −3 and move 5 to the right.", "−3 + 5 = 2"]),
+      E(R`\(-4 - 6\)`, ["−10", "2", "−2", "10"], "You owe $4 and spend $6 more.", ["Both take you further down.", "−4 − 6 = −10"]),
+      E(R`\(5 - (-3)\)`, ["8", "2", "−8", "−2"], "Two minuses side by side become a plus.", [R`\(5 - (-3) = 5 + 3\)`, "= 8"]),
+      E(R`\(-2 - (-7)\)`, ["5", "−9", "9", "−5"], "Change − (−7) into + 7.", [R`\(-2 + 7\)`, "= 5"]),
+      E(R`\((-3)(4)\)`, ["−12", "12", "1", "−7"], "Different signs: negative.", [R`\(3 \times 4 = 12\)`, "One negative, so −12"]),
+      E(R`\((-3)(-4)\)`, ["12", "−12", "−7", "7"], "Same signs: positive.", [R`\(3 \times 4 = 12\)`, "Two negatives make a positive: 12"]),
+      E(R`\(-20 \div 4\)`, ["−5", "5", "−16", "−80"], "Different signs: negative.", [R`\(20 \div 4 = 5\)`, "Different signs, so −5"]),
+      E(R`\(-18 \div (-3)\)`, ["6", "−6", "−21", "54"], "Same signs: positive.", [R`\(18 \div 3 = 6\)`, "Same signs, so 6"]),
+      E(R`\((-2)(-2)(-2)\)`, ["−8", "8", "−6", "6"], "Count the negatives. Odd number of negatives = negative.", [R`\((-2)(-2) = 4\)`, R`\(4 \times (-2) = -8\)`]),
+      E(R`\(2x - 7x\)`, [R`\(-5x\)`, R`\(5x\)`, R`\(-9x\)`, R`\(9x\)`], "Same as 2 − 7, with an x on the end.", ["2 − 7 = −5", R`\(-5x\)`]),
+    ],
+  },
+  {
+    id: "b2", title: "Basics 2", badge: "B2", sub: "Order of operations and fractions", minutes: "12 min",
+    items: [
+      { type: "lesson", title: "BEDMAS: the order to do things",
+        body: R`<p><b>B</b>rackets → <b>E</b>xponents → <b>D</b>ivide and <b>M</b>ultiply (left to right) → <b>A</b>dd and <b>S</b>ubtract (left to right).</p>
+        <div class="big-math">\(3 + 4 \times 2 = 3 + 8 = 11\)</div>
+        <p>Not 14. Multiply comes before add.</p>
+        <p class="tip">Your calculator follows BEDMAS. If you want something done first, put it in brackets.</p>` },
+      E(R`\(3 + 4 \times 2\)`, ["11", "14", "10", "24"], "Multiply before you add.", [R`\(4 \times 2 = 8\)`, "3 + 8 = 11"]),
+      E(R`\((3 + 4) \times 2\)`, ["14", "11", "10", "24"], "Brackets first.", ["3 + 4 = 7", R`\(7 \times 2 = 14\)`]),
+      E(R`\(2 \times 3^2\)`, ["18", "36", "12", "81"], "Exponent before multiply. Only the 3 is squared.", [R`\(3^2 = 9\)`, R`\(2 \times 9 = 18\)`]),
+      E(R`\(20 - 2(3 + 1)\)`, ["12", "72", "18", "−8"], "Brackets, then multiply, then subtract.", ["3 + 1 = 4", R`\(2 \times 4 = 8\)`, "20 − 8 = 12"]),
+      E(R`\(10 - 4^2 \div 2\)`, ["2", "3", "18", "−3"], "Exponent, then divide, then subtract.", [R`\(4^2 = 16\)`, R`\(16 \div 2 = 8\)`, "10 − 8 = 2"]),
+      { type: "lesson", title: "Fractions in 3 rules",
+        body: R`<p><b>Multiply:</b> top times top, bottom times bottom. \(\tfrac12 \times \tfrac34 = \tfrac38\)</p>
+        <p><b>Divide:</b> flip the second fraction, then multiply. \(\tfrac34 \div \tfrac12 = \tfrac34 \times \tfrac21 = \tfrac64 = \tfrac32\)</p>
+        <p><b>Add or subtract:</b> make the bottoms the same first. \(\tfrac12 + \tfrac13 = \tfrac36 + \tfrac26 = \tfrac56\)</p>
+        <p class="tip">You can only cancel things that are multiplied. In \(\tfrac{x + 3}{x}\), the x's do NOT cancel.</p>` },
+      E(R`\(\tfrac12 \times \tfrac34\)`, [R`\(\tfrac38\)`, R`\(\tfrac46\)`, R`\(\tfrac{4}{8}\)`, R`\(\tfrac32\)`], "Top times top, bottom times bottom.", [R`\(1 \times 3 = 3\)`, R`\(2 \times 4 = 8\)`, R`\(\tfrac38\)`]),
+      E(R`\(\tfrac34 \div \tfrac12\)`, [R`\(\tfrac32\)`, R`\(\tfrac38\)`, R`\(\tfrac23\)`, R`\(\tfrac12\)`], "Flip the second fraction, then multiply.", [R`\(\tfrac34 \times \tfrac21 = \tfrac64\)`, R`\(= \tfrac32\)`]),
+      E(R`\(\tfrac12 + \tfrac13\)`, [R`\(\tfrac56\)`, R`\(\tfrac25\)`, R`\(\tfrac16\)`, R`\(\tfrac26\)`], "Make both bottoms 6 first.", [R`\(\tfrac12 = \tfrac36\) and \(\tfrac13 = \tfrac26\)`, R`\(\tfrac36 + \tfrac26 = \tfrac56\)`]),
+      E(R`Can you cancel the x's in \(\dfrac{x + 3}{x}\)?`, ["No, because the top is an addition", "Yes, the answer is 3", "Yes, the answer is 4", "Yes, the answer is 1"], "You can only cancel when everything is multiplied.", ["The top is x PLUS 3.", "Cancelling only works with multiplication, so no."]),
+    ],
+  },
+  {
+    id: "b3", title: "Basics 3", badge: "B3", sub: "Percents and decimals (Basic Skills sheet)", minutes: "12 min",
+    items: [
+      { type: "lesson", title: "Percent ↔ decimal: move 2 places",
+        body: R`<p><b>Percent to decimal:</b> divide by 100. Move the decimal point <b>2 places left</b>.</p>
+        <div class="big-math">\(16.5\% = 0.165 \qquad 3\% = 0.03\)</div>
+        <p><b>Decimal to percent:</b> multiply by 100. Move <b>2 places right</b>.</p>
+        <div class="big-math">\(0.6 = 60\% \qquad 0.0015 = 0.15\%\)</div>
+        <p class="tip">Always exactly 2 places. Count them with your pencil: one, two.</p>` },
+      E("Write 3% as a decimal.", ["0.03", "0.3", "0.003", "3.0"], "Move the decimal 2 places left. 3% is 3.0%.", ["3.0 → 0.30 → 0.03", "(two jumps left)"], "0.03. Check: 3% is small, and 0.03 is three hundredths."),
+      E("Write 16.5% as a decimal.", ["0.165", "0.0165", "1.65", "16.5"], "Move the decimal 2 places left, no more.", ["16.5 → 1.65 → 0.165"]),
+      E("Write 180% as a decimal.", ["1.8", "18", "0.18", "0.018"], "Over 100% means more than 1.", ["180 → 18.0 → 1.80", "= 1.8"]),
+      E(R`Write \(8\tfrac12\%\) as a decimal.`, ["0.085", "0.85", "8.5", "0.0085"], R`\(8\tfrac12 = 8.5\). Then move 2 places left.`, ["8.5% → 0.085"]),
+      E("Write 0.0015 as a percent.", ["0.15%", "1.5%", "15%", "0.0015%"], "Move the decimal 2 places RIGHT.", ["0.0015 → 0.015 → 0.15", "= 0.15%"]),
+      E("Write 2.3 as a percent.", ["230%", "23%", "2.3%", "0.023%"], "Move the decimal 2 places right.", ["2.3 → 23 → 230", "= 230%"]),
+      { type: "lesson", title: "Finding a percent of something",
+        body: R`<p>"Of" means <b>multiply</b>. Change the percent to a decimal, then multiply.</p>
+        <div class="big-math">\(8\% \text{ of } \$425 = 0.08 \times 425 = \$34\)</div>
+        <p class="tip">Do not divide by the percent. \(425 \div 8 = 53.125\) is a common mistake. Check: 10% of 425 is 42.50, so 8% must be a bit less.</p>` },
+      E("8% of $425", ["$34.00", "$53.13", "$3.40", "$340.00"], "Change 8% to 0.08, then multiply.", [R`\(8\% = 0.08\)`, R`\(0.08 \times 425 = 34\)`], "$34.00. Quick check: 10% of $425 is $42.50, so 8% should be a little less."),
+      E("4.2% of $1839", ["$77.24", "$772.38", "$7.72", "$437.86"], "Change 4.2% to 0.042, then multiply.", [R`\(4.2\% = 0.042\)`, R`\(0.042 \times 1839 = 77.238\)`, "Money: $77.24"], "$77.24. Check: 1% of $1839 is about $18, so 4% is about $74."),
+      E("A price goes up 8%. What do you multiply by?", ["1.08", "0.08", "8", "0.92"], "The whole price (1) plus 8% (0.08).", ["1 + 0.08 = 1.08"]),
+      E("A value goes down 2.5%. What do you multiply by?", ["0.975", "0.025", "1.025", "0.75"], "The whole (1) minus 2.5% (0.025).", ["1 − 0.025 = 0.975"]),
+    ],
+  },
+  {
+    id: "f1", title: "Formula Writing", badge: "F", sub: "How to write out a word problem, step by step", minutes: "15 min",
+    items: [
+      { type: "lesson", title: "The 5 lines to write every time",
+        body: R`<ol><li><b>Key word:</b> doubles, half-life, increases %, or decreases %?</li>
+        <li><b>Formula:</b> copy it from the cheat sheet.</li>
+        <li><b>List the numbers:</b> \(A_0 = \), \(t = \), and \(d\), \(h\) or \(r\). Same units!</li>
+        <li><b>Plug in:</b> rewrite the formula with the numbers in place of the letters.</li>
+        <li><b>Answer:</b> calculate, then write it with units.</li></ol>
+        <p class="tip">Teachers give marks for each line, even if the final answer is wrong.</p>` },
+      { ctx: "A bacteria culture starts with 50 bacteria and doubles every 10 minutes. How many after 2 hours?", stepLabel: "Line 1 of 5", q: "What is the key word, and which formula?", choices: [R`"doubles": \(A = A_0 \cdot 2^{t/d}\)`, R`"half-life": \(A = A_0 \cdot (\tfrac12)^{t/h}\)`, R`"increases %": \(A = A_0(1 + r)^t\)`, R`"decreases %": \(A = A_0(1 - r)^t\)`],
+        hints: ["Look for the word that tells you what is happening."], steps: ["The word is 'doubles'.", R`\(A = A_0 \cdot 2^{t/d}\)`], why: R`Doubles → \(A = A_0 \cdot 2^{t/d}\)` },
+      { ctx: "Starts with 50 bacteria, doubles every 10 minutes, after 2 hours.", stepLabel: "Line 2 of 5", q: "List the numbers. Which is right?", choices: [R`\(A_0 = 50,\; t = 120 \text{ min},\; d = 10 \text{ min}\)`, R`\(A_0 = 50,\; t = 2,\; d = 10\)`, R`\(A_0 = 10,\; t = 120,\; d = 50\)`, R`\(A_0 = 2,\; t = 10,\; d = 50\)`],
+        hints: [R`\(A_0\) is the START amount.`, "t and d must be in the same units. Change 2 hours to minutes."], steps: [R`\(A_0 = 50\) (start)`, "d = 10 min (doubling time)", "t = 2 hours = 120 min"], why: "Change hours to minutes so t and d match: t = 120." },
+      { ctx: R`\(A_0 = 50,\; t = 120,\; d = 10\)`, stepLabel: "Line 3 of 5", q: "Plug in. Which is written correctly?", choices: [R`\(A = 50 \cdot 2^{120/10}\)`, R`\(A = 50 \cdot 2^{10/120}\)`, R`\(A = 120 \cdot 2^{50/10}\)`, R`\(A = 50 \cdot 120^{10}\)`],
+        hints: [R`Swap each letter for its number: \(A_0 \to 50\), \(t \to 120\), \(d \to 10\).`], steps: [R`\(A = A_0 \cdot 2^{t/d}\)`, R`\(A = 50 \cdot 2^{120/10}\)`], why: R`\(A = 50 \cdot 2^{120/10}\)` },
+      { ctx: R`\(A = 50 \cdot 2^{120/10}\)`, stepLabel: "Line 4 of 5", q: "Simplify the exponent first. What is it?", choices: [R`\(A = 50 \cdot 2^{12}\)`, R`\(A = 50 \cdot 2^{1200}\)`, R`\(A = 100^{12}\)`, R`\(A = 50 \cdot 2^{0.08}\)`],
+        hints: ["120 ÷ 10 = ?"], steps: [R`\(120 \div 10 = 12\)`, R`\(A = 50 \cdot 2^{12}\)`], why: R`\(A = 50 \cdot 2^{12}\). Do not multiply 50 × 2 first: exponents come before multiplying.` },
+      { ctx: R`\(A = 50 \cdot 2^{12}\)`, stepLabel: "Line 5 of 5", q: "Calculate and write the answer.", choices: ["204 800 bacteria", "1200 bacteria", "100 bacteria", "2 400 bacteria"],
+        hints: ["Calculator: 2 ^ 12 = 4096. Then × 50."], steps: [R`\(2^{12} = 4096\)`, R`\(50 \times 4096 = 204\,800\)`], why: "A = 204 800 bacteria" },
+      { ctx: "$1000 is invested at 8% interest per year, compounded yearly. How much after 8 years?", stepLabel: "Line 1 of 4", q: "Key word and formula?", choices: [R`"increases %": \(A = A_0(1 + r)^t\)`, R`"doubles": \(A = A_0 \cdot 2^{t/d}\)`, R`"decreases %": \(A = A_0(1 - r)^t\)`, R`"half-life": \(A = A_0 \cdot (\tfrac12)^{t/h}\)`],
+        hints: ["Interest makes money grow by a percent."], steps: ["Interest = increases by a percent.", R`\(A = A_0(1 + r)^t\)`], why: R`Interest → \(A = A_0(1 + r)^t\)` },
+      { ctx: "$1000 at 8% per year for 8 years.", stepLabel: "Line 2 of 4", q: "List the numbers.", choices: [R`\(A_0 = 1000,\; r = 0.08,\; t = 8\)`, R`\(A_0 = 1000,\; r = 8,\; t = 8\)`, R`\(A_0 = 8,\; r = 0.08,\; t = 1000\)`, R`\(A_0 = 1000,\; r = 0.8,\; t = 8\)`],
+        hints: ["r must be a decimal: move 2 places left."], steps: [R`\(A_0 = 1000\)`, R`\(r = 8\% = 0.08\)`, R`\(t = 8\)`], why: "r = 0.08, not 8 and not 0.8." },
+      { ctx: R`\(A_0 = 1000,\; r = 0.08,\; t = 8\)`, stepLabel: "Line 3 of 4", q: "Plug in.", choices: [R`\(A = 1000(1.08)^8\)`, R`\(A = 1000(0.08)^8\)`, R`\(A = 1000(9)^8\)`, R`\(A = 1.08(1000)^8\)`],
+        hints: ["1 + 0.08 = 1.08"], steps: [R`\(A = 1000(1 + 0.08)^8\)`, R`\(A = 1000(1.08)^8\)`], why: R`\(A = 1000(1.08)^8\)` },
+      { ctx: R`\(A = 1000(1.08)^8\)`, stepLabel: "Line 4 of 4", q: "Calculate and write the answer.", choices: ["$1850.93", "$1640.00", "$8640.00", "$1.85"],
+        hints: ["Calculator: 1.08 ^ 8 = 1.85093... Then × 1000."], steps: [R`\(1.08^8 = 1.850930...\)`, R`\(\times 1000 = 1850.93\)`], why: "A = $1850.93" },
+      { ctx: "In 1976, a hospital bought 0.5 g of radium. The half-life of radium is 1600 years. How much will be left in 2150?", stepLabel: "Line 1 of 4", q: "Key word and formula?", choices: [R`"half-life": \(A = A_0 \cdot (\tfrac12)^{t/h}\)`, R`"doubles": \(A = A_0 \cdot 2^{t/d}\)`, R`"increases %": \(A = A_0(1 + r)^t\)`, R`"decreases %": \(A = A_0(1 - r)^t\)`],
+        hints: ["The question says 'half-life'."], steps: [R`\(A = A_0 \cdot (\tfrac12)^{t/h}\)`], why: R`Half-life → \(A = A_0 \cdot (\tfrac12)^{t/h}\)` },
+      { ctx: "0.5 g bought in 1976. Half-life 1600 years. How much in 2150?", stepLabel: "Line 2 of 4", q: "List the numbers.", choices: [R`\(A_0 = 0.5,\; t = 174,\; h = 1600\)`, R`\(A_0 = 0.5,\; t = 2150,\; h = 1600\)`, R`\(A_0 = 1976,\; t = 174,\; h = 0.5\)`, R`\(A_0 = 0.5,\; t = 1600,\; h = 174\)`],
+        hints: ["t is the time that passes: 2150 − 1976."], steps: [R`\(A_0 = 0.5\)`, "t = 2150 − 1976 = 174 years", "h = 1600 years"], why: "t = 174 years (the time between the two dates)." },
+      { ctx: R`\(A_0 = 0.5,\; t = 174,\; h = 1600\)`, stepLabel: "Line 3 of 4", q: "Plug in.", choices: [R`\(A = 0.5 \cdot (\tfrac12)^{174/1600}\)`, R`\(A = 0.5 \cdot (\tfrac12)^{1600/174}\)`, R`\(A = 174 \cdot (\tfrac12)^{0.5/1600}\)`, R`\(A = 0.5 \cdot 2^{174/1600}\)`],
+        hints: ["t goes on top of the fraction, h on the bottom."], steps: [R`\(A = 0.5 \cdot (\tfrac12)^{174/1600}\)`], why: R`\(A = 0.5 \cdot (\tfrac12)^{174/1600}\)` },
+      { ctx: R`\(A = 0.5 \cdot (\tfrac12)^{174/1600}\)`, stepLabel: "Line 4 of 4", q: "Calculate and write the answer.", choices: ["0.46 g", "0.0011 g", "0.25 g", "0.54 g"],
+        hints: ["Calculator: 0.5 ^ ( 174 ÷ 1600 ). Use brackets around the fraction!", "Then × 0.5."], steps: [R`\(174 \div 1600 = 0.10875\)`, R`\(0.5^{0.10875} = 0.9274\)`, R`\(0.5 \times 0.9274 = 0.46\)`], why: "A = 0.46 g. Check: only a little time passed compared with 1600 years, so a little less than 0.5 g is left." },
+      { ctx: R`Right triangle: hypotenuse 8 m, one leg 2.5 m, find the other leg x.`, q: "Which is written out correctly?", choices: [R`\(x^2 = 8^2 - 2.5^2\)`, R`\(x^2 = 8^2 + 2.5^2\)`, R`\(x = 8 - 2.5\)`, R`\(8^2 = x^2 - 2.5^2\)`],
+        hints: ["Finding a leg: SUBTRACT."], steps: [R`\(a^2 + b^2 = c^2\)`, R`\(x^2 + 2.5^2 = 8^2\)`, R`\(x^2 = 8^2 - 2.5^2\)`], why: R`\(x^2 = 8^2 - 2.5^2\), then \(x = \sqrt{57.75} = 7.60\) m` },
+    ],
+  },
+];
+MISSIONS.unshift(...MISSIONS_0);
+RULES.unshift(
+  { name: "Negative numbers", rule: R`\(5 - (-3) = 8 \qquad (-3)(-4) = 12\)`, plain: "Two minuses side by side become a plus. Multiplying or dividing: same signs positive, different signs negative." },
+  { name: "BEDMAS", rule: R`\(3 + 4 \times 2 = 11\)`, plain: "Brackets, Exponents, Divide/Multiply, Add/Subtract." },
+  { name: "Percent ↔ decimal", rule: R`\(16.5\% = 0.165 \qquad 0.6 = 60\%\)`, plain: "Always move the decimal exactly 2 places. Percent of something: change to a decimal and MULTIPLY." },
+  { name: "Write out every word problem", rule: "Key word → Formula → List numbers → Plug in → Answer", plain: "Write all 5 lines. You get marks for each one." },
+);
+
 const VIDEOS = [
   { t: "Video 1: Exponent Rules", len: "4.6 min", go: "Missions 0 to 2" },
   { t: "Video 2: Exponent Graphs and Word Problems", len: "4.5 min", go: "Missions 3 to 4B" },
